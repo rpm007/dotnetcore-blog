@@ -1,0 +1,11 @@
+@model Core.Domain.Post
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Create Post</h4>
+
+<form asp-action="Create">
+  @await Html.PartialAsync("_PostPartial")
+</form>

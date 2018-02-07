@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Identity
+@using Core.Domain
+
+@model IEnumerable<Post>
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<h2>Post List</h2>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="list-group">
+            @foreach (var post in Model)
+            {
+                <a asp-action="Details" asp-route-id="@post.Id" class="list-group-item">
+                    <h4 class="list-group-item-heading">@post.Title</h4>
+                    <p class="list-group-item-text">@post.Description</p>
+                </a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="pull-right">
+                        <a asp-action="Edit" asp-route-id="@post.Id">edit</a> | 
+                        <a asp-action="Delete" asp-route-id="@post.Id">delete</a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

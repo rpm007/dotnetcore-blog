@@ -1,0 +1,38 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/css/lib.min.css",
+    "inputFiles": [
+      "bower_components/bootstrap/dist/css/bootstrap.css",
+      "bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css",
+      "bower_components/prism/themes/prism-coy.css"
+    ],
+    "minify": { "enabled": true }
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ],
+    "minify": { "enabled": true }
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/lib.min.js",
+    "inputFiles": [
+      "bower_components/jquery/dist/jquery.js",
+      "bower_components/bootstrap/dist/js/bootstrap.js",
+      "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
+      "bower_components/prism/prism.js"
+    ],
+    "minify": { "enabled": true }
+  }
+]

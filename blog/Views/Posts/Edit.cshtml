@@ -1,0 +1,16 @@
+@model Core.Domain.Post
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    @await Html.PartialAsync("_PostPartial")
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

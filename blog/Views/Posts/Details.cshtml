@@ -1,0 +1,22 @@
+@model Core.Domain.Post
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@Model.Title</h2>
+
+@Html.DisplayTextFor(model => model.Author)
+@Html.DisplayTextFor(model => model.CreateDate)
+
+<hr />
+
+<div>
+    @Html.Raw(Model.Content)
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

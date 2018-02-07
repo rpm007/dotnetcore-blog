@@ -1,0 +1,11 @@
+@using Microsoft.AspNetCore.Identity
+@using Core.Domain
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li><a asp-controller="Posts" asp-action="Create">Create Post</a></li>
+    <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+}

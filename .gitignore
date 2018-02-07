@@ -1,0 +1,13 @@
+
+.vs/Blog/v15/.suo
+.vs/Blog/v15/Server/sqlite3/db.lock
+blog/obj/Blog.csproj.nuget.cache
+blog/obj/Blog.csproj.nuget.g.targets
+blog/obj/Debug/netcoreapp2.0/Blog.AssemblyInfo.cs
+blog/obj/Blog.csproj.nuget.g.props
+.vs/Blog/v15/Server/sqlite3/storage.ide
+blog/obj/Debug/netcoreapp2.0/Blog.csproj.CoreCompileInputs.cache
+blog/obj/Debug/netcoreapp2.0/Blog.AssemblyInfoInputs.cache
+blog/obj/project.assets.json
+blog/Properties/PublishProfiles/FolderProfile.pubxml.user
+blog/Properties/PublishProfiles/FolderProfile.pubxml

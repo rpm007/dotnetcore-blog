@@ -8,24 +8,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Core.Domain;
 using Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Blog
 {
     [Authorize]
-    public class PostsController : Controller
+    public class PostsController : MasterController
     {
-        private readonly UnitOfWork _unitOfWork;
-
-        public PostsController(DataContext context)
+        public PostsController(DataContext context, UserManager<User> userManager)
         {
-            _unitOfWork = new UnitOfWork(context);  
+            UnitOfWork = new UnitOfWork(context);
+            UserManager = userManager;
         }
 
         // GET: Posts
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.Posts.GetAll());
+            var user = await GetCurrentIdentityUser();
+            
+            return user == null ?
+                View(await UnitOfWork.Posts.GetAll()) 
+                : View("Admin", await UnitOfWork.Posts.GetAll());
         }
 
         // GET: Posts/Details/5
@@ -37,7 +41,7 @@ namespace Blog
                 return NotFound();
             }
 
-            var post = await _unitOfWork.Posts.GetDisplay((int)id);
+            var post = await UnitOfWork.Posts.GetDisplay((int)id);
 
             if (post == null)
             {
@@ -67,8 +71,8 @@ namespace Blog
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Posts.Add(post);
-                await _unitOfWork.Complete();
+                UnitOfWork.Posts.Add(post);
+                await UnitOfWork.Complete();
                 return RedirectToAction("Index");
             }
             return View(post);
@@ -82,7 +86,7 @@ namespace Blog
                 return NotFound();
             }
 
-            var post = await _unitOfWork.Posts.Get((int)id);
+            var post = await UnitOfWork.Posts.Get((int)id);
 
             if (post == null)
             {
@@ -103,8 +107,8 @@ namespace Blog
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Posts.Update(post);
-                await _unitOfWork.Complete();
+                UnitOfWork.Posts.Update(post);
+                await UnitOfWork.Complete();
 
                 return RedirectToAction("Index");
             }
@@ -119,7 +123,7 @@ namespace Blog
                 return NotFound();
             }
 
-            var post = await _unitOfWork.Posts.Get((int)id);
+            var post = await UnitOfWork.Posts.Get((int)id);
 
             if (post == null)
             {
@@ -134,9 +138,9 @@ namespace Blog
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var post = await _unitOfWork.Posts.Get((int)id);
-            _unitOfWork.Posts.Remove(post);
-            await _unitOfWork.Complete();
+            var post = await UnitOfWork.Posts.Get((int)id);
+            UnitOfWork.Posts.Remove(post);
+            await UnitOfWork.Complete();
             return RedirectToAction("Index");
         }
     }

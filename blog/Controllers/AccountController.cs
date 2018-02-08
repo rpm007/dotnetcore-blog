@@ -30,7 +30,7 @@ namespace Blog
         //
         // GET: /Account/Login
         [HttpGet]
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
@@ -49,7 +49,7 @@ namespace Blog
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction(nameof(PostsController.Index), "Posts");
                 }
                 if (result.IsLockedOut)
                 {
@@ -72,18 +72,5 @@ namespace Blog
 
             return RedirectToAction(nameof(PostsController.Index), "Posts");
         }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(PostsController.Index), "Posts");
-            }
-        }
-
     }
 }

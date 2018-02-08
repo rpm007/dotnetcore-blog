@@ -47,9 +47,32 @@
 /* ----- Main Content ----- */
 .content-wrapper {
     display: block;
-    max-width: 960px;
+    margin: 4rem 3rem;
 }
 
 body {
-    line-height: 1rem;
+    color: #212121;
+    font-family: Merriweather,Georgia,serif;
+}
+
+p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+a {
+    color: #09c;
+}
+
+a:hover {
+    cursor:pointer;
+}
+
+h2 {
+    margin-bottom: 0.2rem;
+}
+
+.time {
+    font-size: 1rem;
+    color:grey;
 }

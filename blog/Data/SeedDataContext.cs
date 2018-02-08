@@ -9,13 +9,15 @@ namespace Data
 {
     public static class SeedDataContext
     {
-        public static async void Initialize(IServiceProvider serviceProvider, DataContext context)
+        public static async Task<int> Initialize(IServiceProvider serviceProvider, DataContext context)
         {
             if (!context.Users.Any())
             {
                 UserManager<User> userManager = (UserManager<User>)serviceProvider.GetService(typeof(UserManager<User>));
                 var result = await userManager.CreateAsync(getApplicationAdmin(), "Mq5KStki");
             }
+
+            return 1;
         }
 
         private static User getApplicationAdmin()

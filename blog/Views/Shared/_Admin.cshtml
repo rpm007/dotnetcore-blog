@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans" rel="stylesheet" type="text/css">
     <!-- css -->
+    <link href="~/css/lib.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
@@ -21,23 +22,13 @@
                 <div class="title"><a href="javascript:void(0);">rpm</a></div>
                 <div class="title-tag">Coding for life</div>
                 <ul class="nav">
-                    <li><a>Blogs</a></li>
-                    <li><a>Contact</a></li>
-                    <li><a>About</a></li>
+                    @await Html.PartialAsync("_LoginPartial")
                 </ul>
             </div>
         </div>
         <div class="content-wrapper">
             <div class="main-content">
                 @RenderBody()
-                <h2><a>Third</a></h2>
-                <div class="time">26 Aug, 2015</div>
-                <p>
-                    Inducere de premit eodem luserat me domos Lorem markdownum numerem et puta vacantem: vidit agros melius deprensi et talia viribus bacis pondere non, in. Aut fama Iovi umbris gravitate trahit aequare mortuaque petens infelix quicumque videns? Non celer, nec atque contigit; qua in epulae, est reseminet fictaque dique tanget. Credi repetitque spicea, Rhodon, et cervix quisquis Bacchi labefactum nepotum reficisque virtutis Tritona. Nec saevo fecit refundit curvamina! Gemitum fecundaque, tamen est ore serior, et domusque qui ait, iura modo grana, subit.
-                </p>
-                <p>
-                    http://enten.github.io/hugo-boilerplate/
-                </p>
             </div>
         </div>
     </div>

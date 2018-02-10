@@ -26,9 +26,10 @@ namespace Blog
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetService<DataContext>();
-                var test = services.GetService<IConfiguration>();
+                var configuration = services.GetService<IConfiguration>();
 
-                await SeedDataContext.Initialize(services, context);
+                if (configuration.GetValue<bool>("UseInMemory"))
+                    await SeedDataContext.Initialize(services, context, configuration);
             }
         }
 

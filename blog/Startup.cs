@@ -38,9 +38,16 @@ namespace Blog
             // Add context 
             if (IsDevelopment)
             {
-                services.AddDbContext<DataContext>(options =>
-                    options.UseMySql(Configuration.GetValue<string>("ConnectionString")));
-                    // options.UseInMemoryDatabase("Database"));
+                if (Configuration.GetValue<bool>("UseInMemory"))
+                {
+                    services.AddDbContext<DataContext>(options =>
+                        options.UseInMemoryDatabase("Database"));
+                }
+                else
+                {
+                    services.AddDbContext<DataContext>(options =>
+                        options.UseMySql(Configuration.GetValue<string>("ConnectionString")));
+                }
             }
             else
             {

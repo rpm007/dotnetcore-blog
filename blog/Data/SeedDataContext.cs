@@ -4,31 +4,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Core.Domain;
+using Microsoft.Extensions.Configuration;
 
 namespace Data
 {
     public static class SeedDataContext
     {
-        public static async Task<int> Initialize(IServiceProvider serviceProvider, DataContext context)
+        public static async Task<int> Initialize(IServiceProvider serviceProvider, DataContext context, IConfiguration configuration)
         {
             if (!context.Users.Any())
             {
+                string email = configuration.GetValue<string>("TestUserEmail");
+                string password = configuration.GetValue<string>("TestUserPassword");
+
                 UserManager<User> userManager = (UserManager<User>)serviceProvider.GetService(typeof(UserManager<User>));
-                var result = await userManager.CreateAsync(getApplicationAdmin(), "");
+                var result = await userManager.CreateAsync(getUser(email), password);
             }
 
             return 1;
         }
 
-        private static User getApplicationAdmin()
+        private static User getUser(string email)
         {
-            User adminUser = new User()
+            User user = new User()
             {
-                UserName = "robin.mckavanagh@gmail.com",
-                Email = "robin.mckavanagh@gmail.com"
+                UserName = email,
+                Email = email
             };
 
-            return adminUser;
+            return user;
         }
     }
 }

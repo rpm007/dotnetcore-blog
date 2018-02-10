@@ -39,12 +39,13 @@ namespace Blog
             if (IsDevelopment)
             {
                 services.AddDbContext<DataContext>(options =>
-                    options.UseInMemoryDatabase("Database"));
+                    options.UseMySql(Configuration.GetValue<string>("ConnectionString")));
+                    // options.UseInMemoryDatabase("Database"));
             }
             else
             {
                 services.AddDbContext<DataContext>(options =>
-                    options.UseMySql("server=localhost;database=db;uid=rpm;pwd=addPassword"));
+                    options.UseMySql(Configuration.GetValue<string>("ConnectionString")));
             }
 
             // Add identity
@@ -78,16 +79,13 @@ namespace Blog
 
             app.UseStaticFiles();
             app.UseAuthentication();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Posts}/{action=Index}/{id?}");
             });
-
-
-            // SeedDataContext.Initialize(app.ApplicationServices, context);
         }
     }
 }

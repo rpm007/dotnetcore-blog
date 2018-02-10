@@ -14,7 +14,7 @@ namespace Data
             if (!context.Users.Any())
             {
                 UserManager<User> userManager = (UserManager<User>)serviceProvider.GetService(typeof(UserManager<User>));
-                var result = await userManager.CreateAsync(getApplicationAdmin(), "Mq5KStki");
+                var result = await userManager.CreateAsync(getApplicationAdmin(), "");
             }
 
             return 1;

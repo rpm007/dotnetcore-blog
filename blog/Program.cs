@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore;
+﻿using Data;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace Blog
 {
@@ -8,7 +12,24 @@ namespace Blog
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            // Block main thread until seed data is complete
+            MainAsync(host).GetAwaiter().GetResult();
+
+            host.Run();
+        }
+
+        static async Task MainAsync(IWebHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetService<DataContext>();
+                var test = services.GetService<IConfiguration>();
+
+                await SeedDataContext.Initialize(services, context);
+            }
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

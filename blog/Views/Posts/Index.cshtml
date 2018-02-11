@@ -10,9 +10,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div>
+    <h1>bloglist</h1>
+    <span>last update: <time>14 September at 3:08pm</time></span>
+</div>
+
 @foreach (var post in Model)
 {
     <h2><a asp-action="Details" asp-route-id="@post.Id">@post.Title</a></h2>
-    <div class="time">26 Aug, 2015</div>
+    <time>@post.CreateDate.ToShortDateString()</time>
     <p class="list-group-item-text">@post.Description</p>
 }

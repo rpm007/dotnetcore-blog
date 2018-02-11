@@ -72,7 +72,26 @@ h2 {
     margin-bottom: 0.2rem;
 }
 
-.time {
+time {
     font-size: 1rem;
     color:grey;
+}
+
+h1 {
+    line-height: 1;
+    font-family: Raleway,"Open Sans",Arial,sans-serif;
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+}
+
+/* About */
+.paragraph-list {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    margin-top: 0;
+}
+
+.no-margin {
+    margin-bottom: 0;
 }
